@@ -46,6 +46,18 @@
 
         } );
 
+        var $mobile_nav_anchor = $('#et-top-navigation .mobile_nav');
+
+        /** Close the search bar if you open the mobile nav. */
+        $mobile_nav_anchor.click( function() {
+
+            var $this_el = $et_search_icon,
+                $form = $this_el.parents( '#main-header').find( '.et-search-form' );
+
+            $form.addClass( 'et-hidden' );
+            $this_el.removeClass( 'et-clicked' );
+
+        });
 
 	});
 
