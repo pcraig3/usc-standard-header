@@ -265,7 +265,10 @@ class USC_Standard_Header {
 	 * @since    0.1.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/header.js', __FILE__ ), array( 'jquery', 'divi-custom-script' ), self::VERSION );
+        /** Listing Divi's custom.js as a dependency (because it we unset their click handler on their et_search_icon
+         * breaks some of the Divi code controlling tabs and that 'Services' grid layout.
+         */
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/header.js', __FILE__ ), array( 'jquery' /*, 'divi-custom-script'*/ ), self::VERSION );
 	}
 
 	/*
