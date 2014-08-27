@@ -20,11 +20,11 @@ class USC_Standard_Header {
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @since   0.1.0
+	 * @since   0.9.0
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.1.0';
+	const VERSION = '0.9.0';
 
 	/**
 	 * Unique identifier for your the USC Standard Header plugin.
@@ -262,7 +262,7 @@ class USC_Standard_Header {
 	/**
 	 * Register and enqueues public-facing JavaScript files.
 	 *
-	 * @since    0.1.0
+	 * @since    0.9.0
 	 */
 	public function enqueue_scripts() {
         /** Listing Divi's custom.js as a dependency (because it we unset their click handler on their et_search_icon

@@ -18,18 +18,21 @@
 		} );
      */
 
-    /** This USED to wait for Divi's very own 'custom.js', but that caused a bunch of strange problems
-     * like Services stopped working and the tabs on the front of WesternFilf and under 'transportation'
+    /** This ONCE waited for Divi's very own 'custom.js' before it executed, but that caused a bunch of strange
+     * problems: Services stopped working and the tabs on the front of Western Film and under '/transportation'
      * stopped working as well.
      *
      * I dunno, must have been my JS interfering with theirs, because none of this code is relevant to tabs
-     * or the services grid layout.
+     * or the Services grid layout.
      */
     $( document ).ready(function() {
 
 	//$(function () {  when we had Divi's custom.js as a dependency, we didn't wait for $(document).ready
 
         var $et_search_icon = $( '#et_search_icon' );
+
+        var $mobile_nav_anchor = $('#et-top-navigation .mobile_nav');
+
 
         $et_search_icon.unbind( 'click' );
 
@@ -44,9 +47,12 @@
                 $form.find('input').focus();
             }
 
+            /* Close the mobile nav menu if you open the search bar. */
+            $mobile_nav_anchor.removeClass( 'opened' ).addClass( 'closed' );
+            $mobile_nav_anchor.find('> ul').slideUp( 500 );
+
         } );
 
-        var $mobile_nav_anchor = $('#et-top-navigation .mobile_nav');
 
         /** Close the search bar if you open the mobile nav. */
         $mobile_nav_anchor.click( function() {

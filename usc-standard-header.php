@@ -14,7 +14,7 @@
  * Plugin Name:       USC Standard Header
  * Plugin URI:        http://westernusc.org
  * Description:       *Header.php* Includes styling and enables descriptions for USC header. 
- * Version:           0.1.0
+ * Version:           0.9.0
  * Author:            Paul Craig
  * Text Domain:       plugin-name-locale
  * License:           GPL-2.0+
