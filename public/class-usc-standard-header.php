@@ -48,7 +48,7 @@ class USC_Standard_Header {
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
-	 * @since     0.1.0
+	 * @since     0.9.1
 	 */
 	private function __construct() {
 
@@ -62,13 +62,31 @@ class USC_Standard_Header {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 1001 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
-		/* Define custom functionality.
-		 * Refer To http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
-		//add_action( '@TODO', array( $this, 'action_method_name' ) );
-		//add_filter( '@TODO', array( $this, 'filter_method_name' ) );
+        add_filter('pre_get_posts', array( $this, 'catch_empty_search_strings') );
+    }
 
-	}
+    /**
+     * function stops empty searches from pulling up index.php
+     * we're going to handle empty searches in search.php
+     *
+     * @author  Evagoras Charalambous
+     * @see     http://www.evagoras.com/2012/11/01/how-to-handle-and-customize-an-empty-search-query-in-wordpress/
+     *
+     * @since    0.9.1
+     *
+     * @param $query    WordPress' query just before it hits the database
+     * @return mixed    the query after being explicitly set as a search function
+     */
+    public function catch_empty_search_strings($query) {
+        // If 's' request variable is set but empty
+        if (isset($_GET['s']) && empty($_GET['s']) && $query->is_main_query()){
+            $query->is_search = true;
+            $query->is_home = false;
+            $query->set('post__in', array(0));  //if the search string is empty, don't match any posts
+
+        }
+        return $query;
+    }
 
 	/**
 	 * Return the plugin slug.
@@ -270,33 +288,5 @@ class USC_Standard_Header {
          */
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/header.js', __FILE__ ), array( 'jquery' /*, 'divi-custom-script'*/ ), self::VERSION );
 	}
-
-	/*
-	 * NOTE:  Actions are points in the execution of a page or process
-	 *        lifecycle that WordPress fires.
-	 *
-	 *        Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *        Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    0.1.0
-	 *
-	public function action_method_name() {
-		// @TODO: Define your action hook callback here
-	}
-	*/
-
-	/*
-	 * NOTE:  Filters are points of execution in which WordPress modifies data
-	 *        before saving it or sending it to the browser.
-	 *
-	 *        Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *        Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    0.1.0
-	 *
-	public function filter_method_name() {
-		// @TODO: Define your filter hook callback here
-	}
-	*/
 
 }
