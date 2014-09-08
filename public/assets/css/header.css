@@ -14,7 +14,7 @@ EVERYTHING NAV GOES HERE
 
 /*-----Menu Navigation Items (government, community, contact, services)----------*/
 #et-top-navigation{float:none; width:972px;}
-#main-header, #top-menu li{padding:0;}
+#main-header, #top-menu li{padding:0; line-height: 1.7em;}
 #main-header nav#top-menu-nav{padding:0;}
 /*remove arrow pointing down*/
 #top-menu .menu-item-has-children > a:first-child:after, #et-secondary-nav .menu-item-has-children > a:first-child:after{content:normal;}

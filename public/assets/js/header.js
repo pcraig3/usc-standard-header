@@ -33,6 +33,9 @@
 
         var $mobile_nav_anchor = $('#et-top-navigation .mobile_nav');
 
+        //remove string from input field
+        $et_search_icon.parents( '#main-header').find( '.et-search-form input').val('');
+
 
         $et_search_icon.unbind( 'click' );
 
