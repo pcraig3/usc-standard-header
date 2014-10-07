@@ -1,11 +1,15 @@
 <?php
 /**
- * USC Standard Header.
+ * USC Standard Header class enqueues custom CSS and JavaScript meant to be applied to all USC
+ * microsites using the same header.
+ *
+ * In addition, it also ensures that empty search strings are recognized as such, rather than
+ * returning posts
  *
  * @package   USC_Standard_Header
  * @author    Paul Craig <pcraig3@uwo.ca>
  * @license   GPL-2.0+
- * @copyright 2014 University Students' Council
+ * @copyright 2014 pcraig3
  */
 
 /**
@@ -20,11 +24,11 @@ class USC_Standard_Header {
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @since   0.9.0
+	 * @since   1.0.0
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.9.0';
+	const VERSION = '1.0.0';
 
 	/**
 	 * Unique identifier for your the USC Standard Header plugin.
@@ -48,7 +52,7 @@ class USC_Standard_Header {
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
-	 * @since     0.9.1
+	 * @since     1.0.0
 	 */
 	private function __construct() {
 
@@ -62,17 +66,18 @@ class USC_Standard_Header {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 1001 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
+        //function that stops empty search stings defaulting to index.php
         add_filter('pre_get_posts', array( $this, 'catch_empty_search_strings') );
     }
 
     /**
      * function stops empty searches from pulling up index.php
-     * we're going to handle empty searches in search.php
+     * We're going to handle empty searches in search.php
      *
      * @author  Evagoras Charalambous
      * @see     http://www.evagoras.com/2012/11/01/how-to-handle-and-customize-an-empty-search-query-in-wordpress/
      *
-     * @since    0.9.1
+     * @since    1.0.0
      *
      * @param $query    WordPress' query just before it hits the database
      * @return mixed    the query after being explicitly set as a search function

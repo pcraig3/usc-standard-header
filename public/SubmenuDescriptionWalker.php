@@ -2,8 +2,10 @@
 
 /**
  * Create HTML list of nav menu items.
- * Replacement for the native Walker, adds a description to submenu items 
+ * Replacement for the native Walker, adds a description only to submenu items
  * (ie, not the top-level menu items).
+ *
+ * This class expects a modified 'header.php' file in order to work properly.
  *
  * Stolen from toscho on stackexchange.
  * @see    http://wordpress.stackexchange.com/q/14037/
@@ -14,13 +16,13 @@ class Submenu_Description_Walker extends Walker_Nav_Menu
     /**
      * Start the element output.
      *
-     * @param  string $output Passed by reference. Used to append additional content.
-     * @param  object $item   Menu item data object.
-     * @param  int $depth     Depth of menu item. May be used for padding.
-     * @param  array $args    Additional strings.
+     * @param  string $output   Passed by reference. Used to append additional content.
+     * @param  object $item     Menu item data object.
+     * @param  int $depth       Depth of menu item. May be used for padding.
+     * @param  array $args      Additional strings.
      * @return void
      */
-function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 )
+function start_el( &$output, $item, $depth = 0, $args = array() )
     {
         $classes     = empty ( $item->classes ) ? array () : (array) $item->classes;
 
